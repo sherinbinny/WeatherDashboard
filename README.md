@@ -1,5 +1,23 @@
 # Weather Dashboard
 
+### Description
+
+The Weather Dashboard is a web application that allows users to view current weather conditions and a 5-day forecast for cities worldwide. Users can search for a specific city and view its current weather information, including temperature, humidity, and wind speed, as well as the weather forecast for the next five days.
+
+## Features
+
+- **Current Weather:** View the current weather conditions for a searched city, including temperature, humidity, and wind speed.
+- **5-Day Forecast:** Display a forecast for the next five days, including temperature and humidity.
+- **Search History:** Keep track of previously searched cities, allowing users to easily access weather information for frequently searched locations.
+- **Responsive Design:** The dashboard is designed to be responsive, ensuring optimal viewing experience across various devices and screen sizes.
+
+## Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+- [OpenWeatherMap API](https://openweathermap.org/api): Used to fetch weather data for cities.
+- LocalStorage: Used to store search history data locally in the browser.
 
 ### Screenshot
 
