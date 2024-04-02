@@ -1,0 +1,20 @@
+
+body
+{
+    margin: 0;
+}
+
+header
+{
+    background: rgb(52,99,187);
+    background: linear-gradient(90deg, rgba(52,99,187,1) 0%, rgba(33,11,77,1) 95%);
+}
+
+header h1
+{
+    margin: 0;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+}
+
