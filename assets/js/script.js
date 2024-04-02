@@ -39,8 +39,29 @@ searchForm.addEventListener('submit', async function(event)
     const cityName = searchInput.value.trim(); // Get the city name
     if(cityName !== '')
     {
-        
+        try
+        {
+            const weatherData = await fetchWeatherData(cityName); // Fetch current weather data
+            
+        }
+        catch (error)
+        {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later.');
+        }
         
         searchInput.value = ''; // Clear the input field
     }
 });
+
+
+// Function to fetch current weather data
+async function fetchWeatherData(cityName)
+{
+    // GET request to the OpenWeatherMap API to fetch weather data
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`); 
+    
+    if(!response.ok) throw new Error('City not found');
+    //Return response as JSON
+    return response.json(); 
+}
