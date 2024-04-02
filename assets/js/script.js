@@ -42,6 +42,7 @@ searchForm.addEventListener('submit', async function(event)
         try
         {
             const weatherData = await fetchWeatherData(cityName); // Fetch current weather data
+            displayWeather(weatherData); // Display current weather conditions
             
         }
         catch (error)
@@ -64,4 +65,24 @@ async function fetchWeatherData(cityName)
     if(!response.ok) throw new Error('City not found');
     //Return response as JSON
     return response.json(); 
+}
+
+
+// Function to display current weather
+function displayWeather(data)
+{
+    const currentDate = new Date().toLocaleDateString(); // Get the current date
+    const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`; // URL for weather icon
+
+    // HTML to display current weather
+    const html = `<div class="current-weather">
+                    <h2>${data.name}</h2>
+                    <p>${currentDate}</p>
+                    <img src="${iconUrl}" alt="${data.weather[0].description}">
+                    <p>Temperature: ${data.main.temp}°C</p>
+                    <p>Humidity: ${data.main.humidity}%</p>
+                    <p>Wind Speed: ${data.wind.speed} m/s</p>
+                </div>`;
+
+    todaySection.innerHTML = html;
 }
