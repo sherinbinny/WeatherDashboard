@@ -79,11 +79,11 @@ function displayWeather(data)
     // HTML to display current weather
     const html = `<div class="current-weather">
                     <h2>${data.name}</h2>
-                    <p>${currentDate}</p>
+                    <p>(${currentDate})</p>
                     <img src="${iconUrl}" alt="${data.weather[0].description}">
-                    <p>Temperature: ${data.main.temp}°C</p>
+                    <p>Temp: ${data.main.temp}°C</p>
+                    <p>Wind Speed: ${data.wind.speed} KPH</p>
                     <p>Humidity: ${data.main.humidity}%</p>
-                    <p>Wind Speed: ${data.wind.speed} m/s</p>
                 </div>`;
 
     todaySection.innerHTML = html;
@@ -162,18 +162,21 @@ function displayForecast(forecastData)
 {
     forecastSection.innerHTML = ''; // Clear previous forecast data
     let currentDate = new Date(); // Get current date
+    const title = `<h3 class="my-3">5-day Forecast</h3>`;
+    forecastSection.innerHTML += title;
+
     for(let i = 0; i < 5; i++)
     {
-        const forecastDate = currentDate.toLocaleDateString('en-US', { weekday: 'long' }); // Format current date as day
+        const forecastDate = currentDate.toLocaleDateString('en-GB'); // Format current date as day
         const iconUrl = `http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}.png`; // URL for weather icon
 
         // HTML code to display forecast data
-        const html = `<div class="col-lg-2">
-                        <h3>${forecastDate}</h3>
+        const html = `<div class="col-lg-2 me-3 weather-card">
+                        <h5>${forecastDate}</h5>
                         <img src="${iconUrl}" alt="${forecastData[i].weather[0].description}">
-                        <p>Temperature: ${forecastData[i].main.temp}°C</p>
+                        <p>Temp: ${forecastData[i].main.temp}°C</p>
+                        <p>Wind Speed: ${forecastData[i].wind.speed} KPH</p>
                         <p>Humidity: ${forecastData[i].main.humidity}%</p>
-                        <p>Wind Speed: ${forecastData[i].wind.speed} m/s</p>
                     </div>`;
 
         forecastSection.innerHTML += html;

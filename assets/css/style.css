@@ -29,6 +29,11 @@ section
     max-width: 1400px;
 }
 
+#form-heading
+{
+    font-weight: 700;
+}
+
 #search-input
 {
     border: 1px solid rgba(33,11,77);
@@ -60,4 +65,35 @@ section
     text-transform: capitalize;
     background-color: #aeaeae;
     margin-bottom: 10px;
+}
+
+.current-weather
+{
+    border: 1px solid rgba(33, 11, 77);
+    padding: 10px;
+}
+
+.current-weather h2,
+.current-weather p:nth-child(2)
+{
+    display: inline;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+#forecast h3
+{
+    font-weight: 600;
+}
+
+.weather-card
+{
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 15px;
+}
+
+.weather-card h5
+{
+    font-weight: 600;
 }
