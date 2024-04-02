@@ -43,6 +43,7 @@ searchForm.addEventListener('submit', async function(event)
         {
             const weatherData = await fetchWeatherData(cityName); // Fetch current weather data
             displayWeather(weatherData); // Display current weather conditions
+            saveToHistory(cityName); // Save city to search history
             
         }
         catch (error)
@@ -86,3 +87,58 @@ function displayWeather(data)
 
     todaySection.innerHTML = html;
 }
+
+
+// Function to save a search
+function saveToHistory(cityName)
+{
+    // Get the existing search history
+    let cities = JSON.parse(localStorage.getItem('weatherHistory')) || [];
+
+    // Check if entered city is already in search history
+    if(!cities.includes(cityName))
+    {
+        cities.push(cityName);
+        localStorage.setItem('weatherHistory', JSON.stringify(cities));
+        renderHistory(); // Render the updated search history
+    }
+}
+
+
+
+// Function to render search history
+function renderHistory()
+{
+    // Get the search history from local storage or initialise as empty array
+    let cities = JSON.parse(localStorage.getItem('weatherHistory')) || [];
+
+    // Generate HTML code for each city in the search history and insert it into the 'historyList' element
+    historyList.innerHTML = cities.map(city => `<a href="#" class="list-group-item list-group-item-action">${city}</a>`).join('');
+    
+    // Attach event listener to each history item
+    historyList.querySelectorAll('a').forEach(item => {
+        item.addEventListener('click', async function(event)
+        {
+            event.preventDefault();
+            const cityName = item.textContent; // Get the name of the clicked city
+            try
+            {
+                const weatherData = await fetchWeatherData(cityName); // Fetch current weather data
+                displayWeather(weatherData); // Display current weather conditions
+                
+            }
+            catch(error)
+            {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            }
+        });
+    });
+}
+
+
+
+
+// Render search history when page loads
+
+renderHistory(); 
