@@ -18,3 +18,46 @@ header h1
     text-align: center;
 }
 
+.container-fluid > .row
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+section
+{
+    max-width: 1400px;
+}
+
+#search-input
+{
+    border: 1px solid rgba(33,11,77);
+    padding: 0 15px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.weather-search::placeholder
+{
+    color: rgba(0,0,0,0.4);
+}
+
+#search-form .input-group
+{
+    display: block;
+}
+
+#search-button,
+#clear-history-button
+{
+    color: #fff;
+    background-color: rgb(52,99,187)
+}
+
+.list-group-item
+{
+    text-transform: capitalize;
+    background-color: #aeaeae;
+    margin-bottom: 10px;
+}
