@@ -29,3 +29,18 @@ window.addEventListener('load', function()
     localStorage.removeItem('weatherHistory');
     renderHistory(); // Update the history list
 });
+
+
+
+// Event listener for form submission
+searchForm.addEventListener('submit', async function(event)
+{
+    event.preventDefault();
+    const cityName = searchInput.value.trim(); // Get the city name
+    if(cityName !== '')
+    {
+        
+        
+        searchInput.value = ''; // Clear the input field
+    }
+});
