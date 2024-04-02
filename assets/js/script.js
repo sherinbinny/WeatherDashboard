@@ -44,7 +44,8 @@ searchForm.addEventListener('submit', async function(event)
             const weatherData = await fetchWeatherData(cityName); // Fetch current weather data
             displayWeather(weatherData); // Display current weather conditions
             saveToHistory(cityName); // Save city to search history
-            
+            const forecastData = await fetchForecast(weatherData.coord.lat, weatherData.coord.lon); // Fetch 5-day forecast data
+            displayForecast(forecastData); // Display the 5-day forecast
         }
         catch (error)
         {
@@ -125,7 +126,8 @@ function renderHistory()
             {
                 const weatherData = await fetchWeatherData(cityName); // Fetch current weather data
                 displayWeather(weatherData); // Display current weather conditions
-                
+                const forecastData = await fetchForecast(weatherData.coord.lat, weatherData.coord.lon); // Fetch 5-day forecast data
+                displayForecast(forecastData); // Display the 5-day forecast
             }
             catch(error)
             {
@@ -139,6 +141,47 @@ function renderHistory()
 
 
 
-// Render search history when page loads
+// Function to fetch 5-day forecast data
+async function fetchForecast(lat, lon)
+{
+    // GET request to the OpenWeatherMap API to fetch forecast data
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+    if(!response.ok) throw new Error('Forecast data not available');
 
+    //Return response as JSON
+    const data = await response.json();
+
+    // Return the first 5 forecast data
+    return data.list.slice(0, 5);
+}
+
+
+
+// Function to display 5-day forecast data
+function displayForecast(forecastData)
+{
+    forecastSection.innerHTML = ''; // Clear previous forecast data
+    let currentDate = new Date(); // Get current date
+    for(let i = 0; i < 5; i++)
+    {
+        const forecastDate = currentDate.toLocaleDateString('en-US', { weekday: 'long' }); // Format current date as day
+        const iconUrl = `http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}.png`; // URL for weather icon
+
+        // HTML code to display forecast data
+        const html = `<div class="col-lg-2">
+                        <h3>${forecastDate}</h3>
+                        <img src="${iconUrl}" alt="${forecastData[i].weather[0].description}">
+                        <p>Temperature: ${forecastData[i].main.temp}°C</p>
+                        <p>Humidity: ${forecastData[i].main.humidity}%</p>
+                        <p>Wind Speed: ${forecastData[i].wind.speed} m/s</p>
+                    </div>`;
+
+        forecastSection.innerHTML += html;
+        currentDate.setDate(currentDate.getDate() + 1); // Increment current date by 1 day
+    }
+}
+
+
+
+// Render search history when page loads
 renderHistory(); 
